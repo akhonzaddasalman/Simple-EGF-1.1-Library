@@ -1886,3 +1886,109 @@ details.debug .inner
         font-size: 13px;
     }
 }
+
+/* ============================
+   MOBILE BOTTOM NAVIGATION BAR
+   ============================ */
+
+.mobile-bottom-nav
+{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: var(--headerBg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid var(--borderSoft);
+    padding: 8px 0;
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+}
+
+.mobile-bottom-nav .nav-item
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    flex: 1;
+    padding: 8px 4px;
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-size: 11px;
+    cursor: pointer;
+    transition: color 0.2s, transform 0.15s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-bottom-nav .nav-item:not(:disabled):hover,
+.mobile-bottom-nav .nav-item:not(:disabled):active
+{
+    color: var(--accent);
+}
+
+.mobile-bottom-nav .nav-item:active
+{
+    transform: scale(0.92);
+}
+
+.mobile-bottom-nav .nav-item:disabled
+{
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.mobile-bottom-nav .nav-icon
+{
+    font-size: 22px;
+    line-height: 1;
+}
+
+.mobile-bottom-nav .nav-label
+{
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+/* When mobile nav is visible, add padding to main content */
+body.has-mobile-nav main
+{
+    padding-bottom: 80px;
+}
+
+/* Hide desktop controls on mobile app */
+body.is-mobile-app .desktop-controls
+{
+    display: none !important;
+}
+
+/* Show mobile nav only in mobile app context */
+body:not(.is-mobile-app) .mobile-bottom-nav
+{
+    display: none !important;
+}
+
+/* Pause state styling for mobile nav */
+.mobile-bottom-nav .nav-item.pauseOn
+{
+    color: var(--accent);
+}
+
+.mobile-bottom-nav .nav-item.pauseOn .nav-icon::after
+{
+    content: "";
+    display: block;
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin: 2px auto 0;
+}

@@ -21,11 +21,7 @@
     </div>
   </div>
 
-  <div class="row">
-    <button id="btnOpenPkg" type="button" class="btn secondary game-controls" style="cursor:pointer; display:none">
-      📂 Open an EGF package
-    </button>
-
+  <div class="row desktop-controls">
     <button class="btn secondary game-controls" id="btnPause" disabled title="Pause the game / Resume the game" style="display:none">⏸ Pause</button>
     <button class="btn secondary game-controls" id="btnScore" disabled title="View score" style="display:none">🏆 Score</button>
     <button class="btn secondary game-controls" id="btnAbout" title="View game info" style="display:none">ℹ️ About the game</button>
@@ -90,6 +86,26 @@
     </div>
   </section>
 </main>
+
+<!-- Mobile Bottom Navigation Bar (only visible in mobile app) -->
+<nav id="mobileBottomNav" class="mobile-bottom-nav" style="display:none">
+  <button class="nav-item" id="btnPauseMobile" disabled title="Pause">
+    <span class="nav-icon">⏸</span>
+    <span class="nav-label">Pause</span>
+  </button>
+  <button class="nav-item" id="btnScoreMobile" disabled title="Score">
+    <span class="nav-icon">🏆</span>
+    <span class="nav-label">Score</span>
+  </button>
+  <button class="nav-item" id="btnAboutMobile" title="About">
+    <span class="nav-icon">ℹ️</span>
+    <span class="nav-label">About</span>
+  </button>
+  <button class="nav-item" id="btnSettingsMobile" title="Settings">
+    <span class="nav-icon">⚙️</span>
+    <span class="nav-label">Settings</span>
+  </button>
+</nav>
 
 <div id="aboutModal" class="modal" aria-hidden="true">
   <div class="backdrop" id="aboutBackdrop"></div>

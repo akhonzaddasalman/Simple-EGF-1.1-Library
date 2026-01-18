@@ -118,6 +118,13 @@ const I18N = {
         gameSaved: "Game saved to library!",
         confirmRemoveGame: "Remove \"{title}\" from your library?",
         play: "▶️ Play",
+
+        // Bottom nav labels
+        pauseLabel: "Pause",
+        resumeLabel: "Resume",
+        scoreLabel: "Score",
+        aboutLabel: "About",
+        libraryLabel: "Library",
         removeFromLibrary: "🗑️ Remove from Library",
     },
 
@@ -240,6 +247,13 @@ const I18N = {
         confirmRemoveGame: "Remover \"{title}\" da sua biblioteca?",
         play: "▶️ Jogar",
         removeFromLibrary: "🗑️ Remover",
+
+        // Bottom nav labels
+        pauseLabel: "Pausa",
+        resumeLabel: "Retomar",
+        scoreLabel: "Pontuação",
+        aboutLabel: "Sobre",
+        libraryLabel: "Biblioteca",
     },
 
     fr:
@@ -383,6 +397,13 @@ const I18N = {
         confirmRemoveGame: "Supprimer « {title} » de votre bibliothèque ?",
         play: "▶️ Jouer",
         removeFromLibrary: "🗑️ Supprimer",
+
+        // Bottom nav labels
+        pauseLabel: "Pause",
+        resumeLabel: "Reprendre",
+        scoreLabel: "Score",
+        aboutLabel: "À propos",
+        libraryLabel: "Bibliothèque",
     },
 
     zh:
@@ -504,6 +525,13 @@ const I18N = {
         confirmRemoveGame: "从图书馆中移除《{title}》？",
         play: "▶️ 开始游戏",
         removeFromLibrary: "🗑️ 从图书馆移除",
+
+        // Bottom nav labels
+        pauseLabel: "暂停",
+        resumeLabel: "继续",
+        scoreLabel: "得分",
+        aboutLabel: "关于",
+        libraryLabel: "图书馆",
     },
 
     ar:
@@ -625,6 +653,13 @@ const I18N = {
         confirmRemoveGame: "إزالة \"{title}\" من مكتبتك؟",
         play: "▶️ تشغيل",
         removeFromLibrary: "🗑️ إزالة من المكتبة",
+
+        // Bottom nav labels
+        pauseLabel: "إيقاف",
+        resumeLabel: "استئناف",
+        scoreLabel: "النتيجة",
+        aboutLabel: "حول",
+        libraryLabel: "المكتبة",
     },
 
     hi:
@@ -746,6 +781,13 @@ const I18N = {
         confirmRemoveGame: "अपनी लाइब्रेरी से \"{title}\" हटाएँ?",
         play: "▶️ खेलें",
         removeFromLibrary: "🗑️ लाइब्रेरी से हटाएँ",
+
+        // Bottom nav labels
+        pauseLabel: "रोकें",
+        resumeLabel: "जारी",
+        scoreLabel: "स्कोर",
+        aboutLabel: "बारे में",
+        libraryLabel: "लाइब्रेरी",
     },
 
     ur:
@@ -867,6 +909,13 @@ const I18N = {
         confirmRemoveGame: "اپنی لائبریری سے \"{title}\" ہٹائیں؟",
         play: "▶️ کھیلیں",
         removeFromLibrary: "🗑️ لائبریری سے ہٹائیں",
+
+        // Bottom nav labels
+        pauseLabel: "توقف",
+        resumeLabel: "جاری",
+        scoreLabel: "اسکور",
+        aboutLabel: "بارے میں",
+        libraryLabel: "لائبریری",
     },
 
     ru:
@@ -988,6 +1037,13 @@ const I18N = {
         confirmRemoveGame: "Удалить «{title}» из вашей библиотеки?",
         play: "▶️ Играть",
         removeFromLibrary: "🗑️ Удалить из библиотеки",
+
+        // Bottom nav labels
+        pauseLabel: "Пауза",
+        resumeLabel: "Продолжить",
+        scoreLabel: "Счёт",
+        aboutLabel: "О игре",
+        libraryLabel: "Библиотека",
     },
 
     es:
@@ -1109,5 +1165,12 @@ const I18N = {
         confirmRemoveGame: "¿Eliminar «{title}» de tu biblioteca?",
         play: "▶️ Jugar",
         removeFromLibrary: "🗑️ Eliminar",
+
+        // Bottom nav labels
+        pauseLabel: "Pausa",
+        resumeLabel: "Reanudar",
+        scoreLabel: "Puntuación",
+        aboutLabel: "Acerca",
+        libraryLabel: "Biblioteca",
     },
 };

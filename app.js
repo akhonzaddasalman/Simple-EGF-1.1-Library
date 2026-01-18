@@ -69,9 +69,15 @@
     const bgVolPct = $("bgVolPct");
     const fgVolPct = $("fgVolPct");
 
-    const btnOpenPkg = $("btnOpenPkg");
     const langSelect = $("langSelect");
     const langLabel = $("langLabel");
+
+    // Mobile bottom navigation buttons
+    const mobileBottomNav = $("mobileBottomNav");
+    const btnPauseMobile = $("btnPauseMobile");
+    const btnScoreMobile = $("btnScoreMobile");
+    const btnAboutMobile = $("btnAboutMobile");
+    const btnSettingsMobile = $("btnSettingsMobile");
 
     const scoreProgressPct = $("scoreProgressPct");
 
@@ -1330,6 +1336,7 @@
             btnPause.textContent = `${t("resume")}`;
             btnPause.classList.add("pauseOn");
             pauseOverlay.setAttribute("aria-hidden", "false");
+            if (typeof syncMobileButtons === "function") syncMobileButtons();
 
             return;
         }
@@ -1338,6 +1345,7 @@
         btnPause.textContent = `${t("pause")}`;
         btnPause.classList.remove("pauseOn");
         pauseOverlay.setAttribute("aria-hidden", "true");
+        if (typeof syncMobileButtons === "function") syncMobileButtons();
 
         setSceneControlsDisabled(false);
         setNavButtons();
@@ -2316,6 +2324,9 @@
         btnReset.disabled = !zip;
         btnPause.disabled = !zip;
         btnScore.disabled = !zip;
+
+        // Sync mobile buttons
+        if (typeof syncMobileButtons === "function") syncMobileButtons();
     }
 
     function shouldOverrideToGameOver()
@@ -5361,22 +5372,6 @@
         }
     });
 
-    btnOpenPkg.addEventListener("click", (e) =>
-    {
-        if (zip && gameState.sessionActive)
-        {
-            const ok = confirm(t("confirmOpen"));
-
-            if (!ok)
-            {
-                return;
-            }
-        }
-
-        fileInput.value = "";
-        fileInput.click();
-    });
-
     fileInput.addEventListener("change", async () =>
     {
         const f = fileInput.files?.[0];
@@ -5388,7 +5383,7 @@
 
         // Add game to library (does NOT launch it)
         await addGameToLibraryOnly(f);
-        fileInput.value = "";
+            fileInput.value = "";
     });
 
     btnReset.addEventListener("click", async () =>
@@ -5673,8 +5668,6 @@
         if (ctxRemove) ctxRemove.textContent = t("removeFromLibrary") || "🗑️ Remove from Library";
 
         // Top buttons
-
-        btnOpenPkg.textContent = t("openPkg");
         btnPause.title = t("pauseTitle");
         btnScore.title = t("scoreTitle");
         btnAbout.title = t("aboutTitle");
@@ -5904,6 +5897,63 @@
     document.addEventListener("scroll", hideContextMenu, true);
 
     // =========================
+    // MOBILE APP DETECTION
+    // =========================
+
+    function detectMobileApp()
+    {
+        // Detect if running inside a mobile WebView (Flutter app)
+        const isMobileApp = window.flutter_inappwebview ||
+            window.FlutterChannel ||
+            navigator.userAgent.includes("wv") ||
+            (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) ||
+            window.navigator.standalone === true;
+
+        if (isMobileApp)
+        {
+            document.body.classList.add("is-mobile-app");
+            document.body.classList.add("has-mobile-nav");
+            if (mobileBottomNav) mobileBottomNav.style.display = "flex";
+        }
+
+        return isMobileApp;
+    }
+
+    // =========================
+    // MOBILE BUTTON SYNC
+    // =========================
+
+    function syncMobileButtons()
+    {
+        // Sync disabled state
+        if (btnPauseMobile) btnPauseMobile.disabled = btnPause.disabled;
+        if (btnScoreMobile) btnScoreMobile.disabled = btnScore.disabled;
+
+        // Sync pause state class
+        if (btnPauseMobile)
+        {
+            if (isPaused)
+            {
+                btnPauseMobile.classList.add("pauseOn");
+                btnPauseMobile.querySelector(".nav-icon").textContent = "▶";
+                btnPauseMobile.querySelector(".nav-label").textContent = t("resume") || "Resume";
+            }
+            else
+            {
+                btnPauseMobile.classList.remove("pauseOn");
+                btnPauseMobile.querySelector(".nav-icon").textContent = "⏸";
+                btnPauseMobile.querySelector(".nav-label").textContent = t("pause") || "Pause";
+            }
+        }
+    }
+
+    // Mobile button event listeners
+    btnPauseMobile?.addEventListener("click", () => btnPause.click());
+    btnScoreMobile?.addEventListener("click", () => btnScore.click());
+    btnAboutMobile?.addEventListener("click", () => btnAbout.click());
+    btnSettingsMobile?.addEventListener("click", () => btnSettings.click());
+
+    // =========================
     // INITIALIZE BOOKSHELF
     // =========================
 
@@ -5922,6 +5972,9 @@
             showBookshelf();
         }
     }
+
+    // Initialize mobile detection on page load
+    detectMobileApp();
 
     // Initialize bookshelf on page load
     initBookshelf();

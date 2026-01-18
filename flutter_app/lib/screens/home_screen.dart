@@ -32,22 +32,25 @@ class _HomeScreenState extends State<HomeScreen> {
       // Copy web assets to a temporary directory
       final directory = await getApplicationDocumentsDirectory();
       final webDir = Directory('${directory.path}/web');
-      
+
       if (!await webDir.exists()) {
         await webDir.create(recursive: true);
       }
 
       // Copy all web files from assets
-      await _copyAssetToFile('assets/web/index.html', '${webDir.path}/index.html');
+      await _copyAssetToFile(
+          'assets/web/index.html', '${webDir.path}/index.html');
       await _copyAssetToFile('assets/web/app.js', '${webDir.path}/app.js');
-      await _copyAssetToFile('assets/web/style.css', '${webDir.path}/style.css');
+      await _copyAssetToFile(
+          'assets/web/style.css', '${webDir.path}/style.css');
       await _copyAssetToFile('assets/web/i18n.js', '${webDir.path}/i18n.js');
-      await _copyAssetToFile('assets/web/jszip.min.js', '${webDir.path}/jszip.min.js');
+      await _copyAssetToFile(
+          'assets/web/jszip.min.js', '${webDir.path}/jszip.min.js');
 
       // Start local web server
       _webServer = LocalWebServer(webDir.path);
       final port = await _webServer!.start();
-      
+
       setState(() {
         _serverUrl = 'http://localhost:$port/index.html';
       });
@@ -87,12 +90,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
       if (result != null && result.files.isNotEmpty) {
         final file = result.files.first;
-        
+
         if (file.bytes != null) {
           // Convert file bytes to base64 and send to WebView
           final base64Data = base64Encode(file.bytes!);
           final fileName = file.name;
-          
+
           // Call JavaScript function to load the file
           await _webViewController?.evaluateJavascript(source: '''
             (async function() {
@@ -164,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 onWebViewCreated: (controller) {
                   _webViewController = controller;
-                  
+
                   // Add JavaScript handler for file picking
                   controller.addJavaScriptHandler(
                     handlerName: 'pickEgfFile',
@@ -183,14 +186,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   setState(() {
                     _isLoading = false;
                   });
-                  
-                  // Inject JavaScript to intercept file input clicks
+
+                  // Inject JavaScript to mark this as a mobile app and show bottom nav
                   await controller.evaluateJavascript(source: '''
-                    // Override the file input click to use native picker on mobile
-                    const originalFileInputClick = document.getElementById('fileInput');
-                    if (originalFileInputClick) {
-                      // Keep the original behavior - the web file picker works in WebView
+                    // Mark body as mobile app for CSS styling
+                    document.body.classList.add('is-mobile-app');
+                    document.body.classList.add('has-mobile-nav');
+                    
+                    // Show mobile bottom navigation
+                    const mobileNav = document.getElementById('mobileBottomNav');
+                    if (mobileNav) {
+                      mobileNav.style.display = 'flex';
                     }
+                    
+                    // Set a flag for JavaScript detection
+                    window.flutter_inappwebview = true;
                   ''');
                 },
                 onProgressChanged: (controller, progress) {
@@ -208,7 +218,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Color(0xFF4da3ff),
                 ),
               ),
-            
+
             // Loading indicator
             if (_isLoading && _serverUrl != null)
               Positioned(
