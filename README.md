@@ -1,3 +1,3 @@
-# Simple EGF 1.1 Reader - Quick Start Guide
+# Simple EGF 1.1 Library - Quick Start Guide
 
-**Simple EGF 1.1 Reader** is a standalone web tool that loads and plays Educational Game Format 1.1 (EGF). It is compatible with EGF 1.0.
+**Simple EGF 1.1 Library* is a standalone web tool (with an included Flutter app) that provides a game library and lets users play Educational Game Format (EGF) 1.1 games. It is also compatible with EGF 1.0.
