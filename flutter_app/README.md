@@ -1,10 +1,10 @@
-# EGF Reader - Flutter App
+# EGF Library  - Flutter App
 
 A Flutter WebView-based application for reading EGF (Educational Game Format) files.
 
 ## Overview
 
-This Flutter app wraps the existing web-based EGF Reader in a native WebView, providing:
+This Flutter app wraps the existing web-based EGF Library  in a native WebView, providing:
 - Native file picker for selecting .egf files
 - Local storage via IndexedDB (persisted in WebView)
 - Full offline support
@@ -108,7 +108,7 @@ Then archive and submit through Xcode.
 
 ### Android
 
-- **Package ID:** `org.egfformat.reader`
+- **Package ID:** `org.egfformat.Library `
 - **Min SDK:** 21 (Android 5.0)
 - **Target SDK:** 34 (Android 14)
 
